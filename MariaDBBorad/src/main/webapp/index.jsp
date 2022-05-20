@@ -65,6 +65,10 @@
 							<c:param name="click" value="${true }"/>						
 						</c:url>
 						<a href="${url }"><c:out value="${vo.subject }" /></a>
+						<%-- 여기에 댓글 개수를 출력해보자!! --%>
+						<c:if test="${vo.commentCount > 0 }">
+							- (${vo.commentCount})
+						</c:if>
 					</td>
 					<td>
 						<c:out value="${vo.name }" />

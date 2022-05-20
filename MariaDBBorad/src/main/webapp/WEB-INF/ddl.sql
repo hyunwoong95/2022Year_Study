@@ -27,8 +27,17 @@ values
 	('한사람',password('1234'), '제목이다 6', '내용이당 6', '192.168.0.45');
 	
 
-
-
+-- 댓글 테이블을 만든다
+CREATE TABLE board_comment(
+	idx int PRIMARY KEY auto_increment,
+	ref int NOT NULL,
+	name varchar(30) NOT NULL,
+	password varchar(50) NOT NULL,
+	content text NOT NULL,
+	regDate timestamp DEFAULT now(),
+	ip varchar(20) NOT NULL,
+	FOREIGN key(ref) REFERENCES board(idx)
+);
 
 
 

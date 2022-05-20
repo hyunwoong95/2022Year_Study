@@ -6,13 +6,13 @@ import java.util.List;
 public class PagingVO<T> {
 	private List<T> list;
 	
-	private int totalCount;
-	private int currentPage;
-	private int pageSize;
-	private int blockSize;
+	private int totalCount;	// 전체 데이터의 개수(DAO를 통해서 가져온다.)
+	private int currentPage;	// 현재 페이지(초기에는 1으로 초기화하여 첫번째 페이지를 나타낸다.)
+	private int pageSize;	// 한번에 볼 목록의 크기(현재 페이지에서 보여줄 목록의 개수)
+	private int blockSize;	// 한번에 나열할 페이지 번호
 	
 	
-	private int totalPage;
+	private int totalPage; // 전체 페이지수 = (totalCount / pageSize) + (totalCount%pageSize)
 	private int startNo;
 	private int endNo;
 	private int startPage;
@@ -29,12 +29,13 @@ public class PagingVO<T> {
 	}
 
 	private void calc() {
-		
-		if(totalCount<0) totalCount = 0;
+		// 유효성 검사를 진행한다. url창에 사용자가 장난을 칠수도 있기때문에 
+		if(totalCount<0) totalCount = 0; 
 		if(currentPage<=0) currentPage=1;
 		if(pageSize<=1) pageSize=10;
 		if(blockSize<=1) pageSize=10;
 		
+		// 전체 목록의 수가 0보다 크다면 데이터가 있다는 뜻이죠?ㅎ
 		if(totalCount>0) {
 			totalPage = (totalCount - 1)/pageSize + 1;
 			startNo = (currentPage - 1) * pageSize;
